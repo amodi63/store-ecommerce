@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+<<<<<<< HEAD
         "astrotomic/laravel-translatable": "^11.10",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.11",
@@ -13,6 +14,12 @@
         "laravel/tinker": "^2.7",
         "mcamara/laravel-localization": "^1.7",
         "yajra/laravel-datatables-oracle": "10.0"
+=======
+        "guzzlehttp/guzzle": "^7.2",
+        "laravel/framework": "^9.11",
+        "laravel/sanctum": "^2.14.1",
+        "laravel/tinker": "^2.7"
+>>>>>>> f8bcc95f63d19519f0259da44a5f546bcb293e1b
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -32,10 +39,14 @@
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
+<<<<<<< HEAD
         },
         "files": [
             "app/helpers/general.php"
         ]
+=======
+        }
+>>>>>>> f8bcc95f63d19519f0259da44a5f546bcb293e1b
     },
     "scripts": {
         "post-autoload-dump": [
