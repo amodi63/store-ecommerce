@@ -11,7 +11,11 @@ return [
     | reset options for your application. You may change these defaults
     | as required, but they're a perfect start for most applications.
     |
+<<<<<<< HEAD
+     */
+=======
     */
+>>>>>>> f8bcc95f63d19519f0259da44a5f546bcb293e1b
 
     'defaults' => [
         'guard' => 'web',
@@ -33,13 +37,24 @@ return [
     |
     | Supported: "session"
     |
+<<<<<<< HEAD
+     */
+=======
     */
+>>>>>>> f8bcc95f63d19519f0259da44a5f546bcb293e1b
 
     'guards' => [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
+<<<<<<< HEAD
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+=======
+>>>>>>> f8bcc95f63d19519f0259da44a5f546bcb293e1b
     ],
 
     /*
@@ -57,13 +72,24 @@ return [
     |
     | Supported: "database", "eloquent"
     |
+<<<<<<< HEAD
+     */
+=======
     */
+>>>>>>> f8bcc95f63d19519f0259da44a5f546bcb293e1b
 
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
+<<<<<<< HEAD
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
+=======
+>>>>>>> f8bcc95f63d19519f0259da44a5f546bcb293e1b
 
         // 'users' => [
         //     'driver' => 'database',
@@ -84,7 +110,11 @@ return [
     | considered valid. This security feature keeps tokens short-lived so
     | they have less time to be guessed. You may change this as needed.
     |
+<<<<<<< HEAD
+     */
+=======
     */
+>>>>>>> f8bcc95f63d19519f0259da44a5f546bcb293e1b
 
     'passwords' => [
         'users' => [
@@ -93,6 +123,15 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+<<<<<<< HEAD
+        'admins' => [
+            'provider' => 'admins',
+            'table' => 'password_resets',
+            'expire' => 60, //Minutes
+            'throttle' => 60, //seconds
+        ],
+=======
+>>>>>>> f8bcc95f63d19519f0259da44a5f546bcb293e1b
     ],
 
     /*
@@ -104,7 +143,11 @@ return [
     | times out and the user is prompted to re-enter their password via the
     | confirmation screen. By default, the timeout lasts for three hours.
     |
+<<<<<<< HEAD
+     */
+=======
     */
+>>>>>>> f8bcc95f63d19519f0259da44a5f546bcb293e1b
 
     'password_timeout' => 10800,
 
