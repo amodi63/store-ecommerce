@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-<<<<<<< HEAD
  */
 
 // Route::get('/', function () {
@@ -24,10 +23,3 @@ Route::get('/dashboard', function () {
 
 require __DIR__ . '/admin.php';
 require __DIR__ . '/front.php';
-=======
-*/
-
-Route::get('/', function () {
-    return view('welcome');
-});
->>>>>>> f8bcc95f63d19519f0259da44a5f546bcb293e1b

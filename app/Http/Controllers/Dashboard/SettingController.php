@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ShippingsRequest;
 use App\Models\Setting;
-use Illuminate\Http\Request;
 
 class SettingController extends Controller
 {
@@ -23,9 +23,8 @@ class SettingController extends Controller
         return view('dashboard.settings.shippings.edit', compact('shippingMethod'));
 
     }
-    public function updateShipping(Request $request, $id)
+    public function updateShipping(ShippingsRequest $request, $id)
     {
         return $request;
-
     }
 }
