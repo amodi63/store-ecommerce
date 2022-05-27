@@ -27,5 +27,17 @@ class ShippingsRequest extends FormRequest
             'value' => ['required', 'string'],
             'plain_value' => ['required', 'numeric', 'min:1'],
         ];
+
+    }
+    public function messages()
+    {
+        return [
+            'value.required' => __('validation/validation.required'),
+            'value.string' => __('validation/validation.string'),
+            'plain_value.required' => __('validation/validation.required'),
+            'plain_value.numeric' => __('validation/validation.numeric'),
+            'plain_value.min' => __('validation/validation.min'),
+
+        ];
     }
 }
