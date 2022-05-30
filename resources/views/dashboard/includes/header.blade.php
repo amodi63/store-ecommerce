@@ -30,18 +30,17 @@
                 <ul class="nav navbar-nav float-right">
                     <li class="dropdown dropdown-user nav-item">
                         <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                <span class="mr-1">{{__('مرحبا')}}
+                <span class="mr-1 text-bold-700">{{__('header.hello')}}
                   <span
-                      class="user-name text-bold-700"> Mohammed Amodi</span>
+                      class="user-name text-bold-700"> {{Auth('admin')->user()->name}}</span>
                 </span>
                             <span class="avatar avatar-online">
-                  <img  style="height: 35px;" src="" alt="avatar"><i></i></span>
+                  <img  style="height: 35px;" src="{{asset('assets/images/amodi.jpg')}}" alt="avatar"><i></i></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href=""><i
-                                    class="ft-user"></i> {{__('تعديل الملف الشحصي')}}</a>
+                                    class="ft-user"></i> {{__('header.edit_profile')}}</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href=""><i class="ft-power"></i> تسجيل
-                                الخروج </a>
+                            <a class="dropdown-item" href="{{route('admin.logout')}}"><i class="ft-power"></i> {{__('header.logout')}}</a>
                         </div>
                     </li>
 
