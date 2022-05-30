@@ -26,7 +26,9 @@ Route::group(
             Route::group(['prefix' => 'settings', 'as' => 'setting.'], function () {
                 Route::get('shipping-methods/{type}', [SettingController::class, 'editShipping'])->name('shipping.edit');
                 Route::put('shipping-methods/{id}', [SettingController::class, 'updateShipping'])->name('shipping.update');
+
             });
+            Route::get('logout', [LoginController::class, 'logout'])->name('logout');
         });
 
         Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['guest:admin']], function () {
