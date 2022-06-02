@@ -1042,7 +1042,7 @@ select.form-control {
 }
 .header-navbar .navbar-container ul.nav li a.dropdown-user-link {
   padding : 1.2rem 1rem;
-  line-height : 23px;
+  line-height : 29px;
 }
 .header-navbar .navbar-container ul.nav li a.dropdown-user-link .user-name {
   display : inline-block;
