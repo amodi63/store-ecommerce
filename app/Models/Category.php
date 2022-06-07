@@ -16,5 +16,21 @@ class Category extends Model
     protected $casts = [
         'is_active' => 'boolean',
     ];
+    public function scopeParent($query)
+    {
+        return $query->whereNull('parent_id');
+    }
+    public function scopeChild($query)
+    {
+        return $query->whereNotNull('parent_id');
+    }
+    public function isActive()
+    {
+        return $this->is_active == 0 ? __('admin/category.not_active') : __('admin/category.active');
+    }
+    public function _parent()
+    {
+        return $this->belongsTo(self::class, 'parent_id', 'id');
+    }
 
 }
