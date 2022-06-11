@@ -1,10 +1,11 @@
 <?php
 
+use App\Http\Controllers\Dashboard\BrandController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\LoginController;
-use App\Http\Controllers\Dashboard\SettingController;
 use App\Http\Controllers\Dashboard\ProfileController;
+use App\Http\Controllers\Dashboard\SettingController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -35,6 +36,7 @@ Route::group(
                 Route::put('update', [ProfileController::class, 'update'])->name('update');
 
             });
+
             //Begin Categories Routes
             Route::group(['as' => 'categories.', 'prefix' => 'categories'], function () {
                 Route::get('/{type}', [CategoryController::class, 'index'])->name('index');
@@ -45,6 +47,10 @@ Route::group(
                 Route::get('/{type}/{id}/edit', [CategoryController::class, 'edit'])->name('edit');
             });
             //End Categories Routes
+
+            //Begin Brands Routes
+            Route::resource('brands', BrandController::class);
+            //End Brands Routes
 
             Route::get('logout', [LoginController::class, 'logout'])->name('logout');
         });
