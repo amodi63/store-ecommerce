@@ -50,6 +50,7 @@
                                             <tr>
                                                 <th>id </th>
                                                 <th>{{__('admin/category.name')}} </th>
+                                                <th>{{__('admin/category.parent_category')}} </th>
                                                 <th> {{__('admin/category.slug')}}  </th>
                                                 <th>{{__('admin/category.status')}} </th>
                                                 <th>{{__('admin/category.img_category')}}</th>
@@ -62,15 +63,16 @@
                                                 <tr>
                                                     <td>{{$category->id}}</td>
                                                     <td>{{$category->name}}</td>
+                                                    <td>{{$category->_parent->name }}</td>
                                                     <td>{{$category->slug}}</td>
                                                     <td>{{$category->isActive()}}</td>
                                                     <td> <img style="width: 150px; height: d100px;" src=" "></td>
                                                     <td>
                                                         <div class="btn-group" role="group"
                                                             aria-label="Basic example">
-                                                            <a href="{{route('admin.categories.edit',['main-category', $category -> id])}}"
+                                                            <a href="{{route('admin.categories.edit',[$category -> id])}}"
                                                             class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">{{__('admin\category.edit')}}</a>
-                                                            <form action="{{route('admin.categories.destroy', ['main-category', $category->id])}}" method="POST">
+                                                            <form action="{{route('admin.categories.destroy', [$category->id])}}" method="POST">
                                                                 @csrf
                                                                 @method('delete')
                                                                 <button type="submit" class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">{{__('admin\category.delete')}}</button>

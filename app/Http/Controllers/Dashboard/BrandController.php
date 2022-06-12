@@ -7,6 +7,7 @@ use App\Http\Requests\BrandRequest;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class BrandController extends Controller
 {
@@ -40,7 +41,7 @@ class BrandController extends Controller
     public function store(BrandRequest $request)
     {
         try {
-
+            DB::beginTransaction();
             if (!$request->has('is_active')) {
                 $request->request->add(['is_active' => 0]);
             }
@@ -97,12 +98,20 @@ class BrandController extends Controller
     {
         try {
             $brand = Brand::findOrFail($id);
+            if ($request->has('photo')) {
+                $img_name = uplodeImage('brands', $request->photo);
+                Brand::where('id', $id)->update(['photo' => $img_name]);
+                $path = public_path('assets/images/brands/' . $brand->photo);
+                if (File::exists($path)) {
+                    File::delete($path);
+                }
+            }
             if (!$request->has('is_active')) {
                 $request->request->add(['is_active' => 0]);
             }
-            $brand->update($request->all());
+            $brand->update($request->except(['photo', 'id', '_token']));
             DB::commit();
-            return redirect()->route('admin.categories.index')->with([
+            return redirect()->route('admin.brands.index')->with([
                 'success' => __('alerts/success.update'),
 
             ]);
@@ -121,7 +130,13 @@ class BrandController extends Controller
      */
     public function destroy($id)
     {
+        $brand = Brand::find($id);
         Brand::find($id)->delete();
+        $path = public_path('assets/images/brands/' . $brand->photo);
+        if (File::exists($path)) {
+            File::delete($path);
+        }
         return redirect()->back()->with(['success' => __('alerts/success.delete')]);
+
     }
 }

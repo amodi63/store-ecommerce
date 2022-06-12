@@ -48,7 +48,7 @@
                                               enctype="multipart/form-data">
                                             @csrf
                                             <div class="form-group">
-                                                <label> {{__('admin/brand.img_brand')}} </label>
+                                                <label> {{__('admin/brand.brand_image')}} </label>
                                                 <label id="projectinput7" class="file center-block">
                                                     <input type="file" id="file" name="photo">
                                                     <span class="file-custom"></span>

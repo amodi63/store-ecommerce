@@ -11,9 +11,9 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('admin/category.main')}} </a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{route('admin.categories.index', 'main-category')}}"> {{__('admin/category.main_categories')}} </a>
+                                <li class="breadcrumb-item"><a href="{{route('admin.brands.index')}}"> {{__('admin/brand.brands')}} </a>
                                 </li>
-                                <li class="breadcrumb-item active"> {{__('admin/category.edit')}}
+                                <li class="breadcrumb-item active"> {{__('admin/brand.edit_brand')}}
                                 </li>
                             </ol>
                         </div>
@@ -27,7 +27,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form"> {{__('admin/category.edit_main_category')}} </h4>
+                                    <h4 class="card-title" id="basic-layout-form"> {{__('admin/brand.edit_brand')}} </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -55,16 +55,16 @@
                                             <div class="form-group">
                                                 <div class="text-center">
                                                     <img
-                                                        src=""
-                                                        class="rounded-circle  height-150" alt="image category">
+                                                        src="{{$brand->getPhotoAttr($brand->photo)}}"
+                                                        style="width: 150px; height: 100px;" alt="image brand" >
                                                 </div>
                                             </div>
 
 
                                             <div class="form-group">
-                                                <label> {{__('admin/brand.brand_img')}} </label>
+                                                <label> {{__('admin/brand.brand_image')}}</label>
                                                 <label id="projectinput7" class="file center-block">
-                                                    <input type="file" id="file" name="photo">
+                                                    <input type="file" id="file" name="photo" style="color: transparent";/>
                                                     <span class="file-custom"></span>
                                                 </label>
                                                 @error('photo')

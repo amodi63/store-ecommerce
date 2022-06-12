@@ -11,7 +11,7 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('admin/category.main')}} </a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{route('admin.categories.index', 'main-category')}}"> {{__('admin/category.main_categories')}} </a>
+                                <li class="breadcrumb-item"><a href="{{route('admin.categories.index')}}">{{__('admin/category.categories')}} </a>
                                 </li>
                                 <li class="breadcrumb-item active"> {{__('admin/category.edit')}}
                                 </li>
@@ -44,7 +44,7 @@
                                 <div class="card-content collapse show">
                                     <div class="card-body">
                                         <form class="form"
-                                              action="{{route('admin.categories.update',['main-category',$category -> id])}}"
+                                              action="{{route('admin.categories.update',[$category -> id])}}"
                                               method="POST"
                                               enctype="multipart/form-data">
                                             @csrf
@@ -106,9 +106,28 @@
                                                         </div>
                                                     </div>
 
-
-
-
+                                                    <div class="row" id="cats_list" >
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label for="projectinput1"> {{__('admin/category.select_parent_category')}}
+                                                                </label>
+                                                                <select name="parent_id" class="select2 form-control">
+                                                                    <optgroup >
+                                                                        @if($parents && $parents -> count() > 0)
+                                                                            @foreach($parents as $parent)
+                                                                                <option
+                                                                                    value="{{$parent->id }}" @if ($parent-> id == $category->parent_id) selected @endif>{{$parent-> name}}</option>
+                                                                            @endforeach
+                                                                        @endif
+                                                                    </optgroup>
+                                                                </select>
+                                                                @error('parent_id')
+                                                                <span class="text-danger"> {{$message}}</span>
+                                                                @enderror
+    
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
                                                 </div>
                                                 <div class="row">
@@ -127,8 +146,46 @@
                                                             @enderror
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="radio"
+                                                                   name="type"
+                                                                   value="1"
+                                                                   @if ($category->parent_id == null) 
+                                                                       checked
+                                                                   @endif
+                                                                   class="switchery"
+                                                                   data-color="success"
+                                                            />
+
+                                                            <label
+                                                                class="card-title ml-1">
+                                                                 {{__('admin/category.main_category')}}
+                                                            </label>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="radio"
+                                                                   name="type"
+                                                                   value="2"
+                                                                   @if ($category->parent_id !== null) 
+                                                                       checked
+                                                                   @endif
+                                                                   class="switchery" data-color="success"/>
+                                                            <label
+                                                                class="card-title ml-1">
+                                                                     {{__('admin/category.sub_category')}}
+                                                            </label>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    @error("is_active")
+                                                            <span class="text-danger">{{$message }}</span>
+                                                    @enderror
+                                               </div>
 
 
                                             <div class="form-actions">
@@ -153,4 +210,18 @@
         </div>
     </div>
 
+    @stop
+    @section('script')
+
+    <script>
+        $('input:radio[name="type"]').change(
+            function(){
+                if (this.checked && this.value == '2') {  // 1 if main cat - 2 if sub cat
+                    $('#cats_list').removeClass('hidden');
+
+                }else{
+                    $('#cats_list').addClass('hidden');
+                }
+            });
+    </script>
     @stop

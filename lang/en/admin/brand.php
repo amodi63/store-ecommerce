@@ -5,7 +5,8 @@ return [
     'add_n_brand' => 'Add New Brand',
     'add_brand' => 'Add Brand',
     'name' => 'Brand Name',
-    'img_brand' => 'Image Brand',
+    'brand_image' => 'Brand Image',
     'about_brand' => 'About Brand',
+    'edit_brand' => 'Edit Brand',
 
 ];

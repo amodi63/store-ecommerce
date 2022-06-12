@@ -10,7 +10,7 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('admin/category.main')}} </a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{route('admin.categories.index', 'main-category')}}">  {{__('admin/category.main_categories')}}</a>
+                                <li class="breadcrumb-item"><a href="{{route('admin.categories.index')}}">  {{__('admin/category.main_categories')}}</a>
                                 </li>
                                 <li class="breadcrumb-item active"> {{__('admin/category.add_main_category')}}</a>
                                 </li>
@@ -43,7 +43,7 @@
                                 <div class="card-content collapse show">
                                     <div class="card-body">
                                         <form class="form"
-                                              action="{{route('admin.categories.store', 'main-category')}}"
+                                              action="{{route('admin.categories.store')}}"
                                               method="POST"
                                               enctype="multipart/form-data">
                                             @csrf
@@ -93,6 +93,29 @@
                                                     </div>
                                                 </div>
 
+                                                <div class="row hidden" id="cats_list" >
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label for="projectinput1"> {{__('admin/category.select_parent_category')}}
+                                                            </label>
+                                                            <select name="parent_id" class="select2 form-control">
+                                                                <optgroup >
+                                                                    @if($categories && $categories -> count() > 0)
+                                                                        @foreach($categories as $category)
+                                                                            <option
+                                                                                value="{{$category -> id }}">{{$category -> name}}</option>
+                                                                        @endforeach
+                                                                    @endif
+                                                                </optgroup>
+                                                            </select>
+                                                            @error('parent_id')
+                                                            <span class="text-danger"> {{$message}}</span>
+                                                            @enderror
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group mt-1">
@@ -109,7 +132,42 @@
                                                             @enderror
                                                         </div>
                                                     </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="radio"
+                                                                   name="type"
+                                                                   value="1"
+                                                                   checked
+                                                                   class="switchery"
+                                                                   data-color="success"
+                                                            />
 
+                                                            <label
+                                                                class="card-title ml-1">
+                                                                 {{__('admin/category.main_category')}}
+                                                            </label>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+                                                            <input type="radio"
+                                                                   name="type"
+                                                                   value="2"
+                                                                   class="switchery" data-color="success"
+                                                            />
+
+                                                            <label
+                                                                class="card-title ml-1">
+                                                                     {{__('admin/category.sub_category')}}
+                                                            </label>
+
+                                                        </div>
+                                                        @error("is_active")
+                                                            <span class="text-danger">{{$message }}</span>
+                                                        @enderror
+                                                    </div>
                                                 </div>
                                             </div>
 

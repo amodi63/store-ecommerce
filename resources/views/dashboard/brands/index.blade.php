@@ -6,13 +6,13 @@
         <div class="content-wrapper">
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2">
-                    <h3 class="content-header-title">{{__('admin/category.main_categories')}}</h3>
+                    <h3 class="content-header-title">{{__('admin/brand.brands')}}</h3>
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('admin/category.main')}}</a>
                                 </li>
-                                <li class="breadcrumb-item active">  {{__('admin/category.main_categories')}}
+                                <li class="breadcrumb-item active">  {{__('admin/brand.all_brands')}}
                                 </li>
                             </ol>
                         </div>
@@ -50,7 +50,7 @@
                                             <tr>
                                                 <th>id </th>
                                                 <th>{{__('admin/brand.name')}} </th>
-                                                <th>{{__('admin/brand.img_brand')}}</th>
+                                                <th>{{__('admin/brand.brand_image')}}</th>
                                                 <th>{{__('admin/category.status')}} </th>
                                                 <th>{{__('admin/category.measures')}}</th>
                                             </tr>

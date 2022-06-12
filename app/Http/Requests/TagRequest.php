@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BrandRequest extends FormRequest
+class TagRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +25,7 @@ class BrandRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
-            'photo' => ['required_without:id'],
-            'is_active' => ['boolean'],
+            'slug' => ['required', 'unique:tags,slug,' . $this->id],
         ];
     }
     public function messages()
@@ -34,9 +33,10 @@ class BrandRequest extends FormRequest
         return [
             'name.required' => __('validation/validation.required'),
             'name.string' => __('validation/validation.string'),
-            'photo.required' => __('validation/validation.required'),
+            'slug.required' => __('validation/validation.required'),
+            'slug.unique' => __('validation/validation.unique'),
+
         ];
 
     }
-
 }

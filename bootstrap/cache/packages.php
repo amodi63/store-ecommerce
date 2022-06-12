@@ -52,6 +52,13 @@
       0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     ),
   ),
+  'spatie/laravel-enum' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Spatie\\Enum\\Laravel\\EnumServiceProvider',
+    ),
+  ),
   'spatie/laravel-ignition' => 
   array (
     'providers' => 
