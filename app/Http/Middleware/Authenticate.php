@@ -19,7 +19,8 @@ class Authenticate extends Middleware
             if (Request::is(app()->getLocale() . '/admin*')) {
                 return route('admin.login');
             }
-            // return route('login');
+            // return $request;
+            // return route('user.login');
             return 'login';
         }
     }

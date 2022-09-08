@@ -17,6 +17,7 @@ $(document).ready(function() {
         responsive: false,
         autoWidth: false,
         rowReorder: true,
+        
         "columnDefs": [
             { "visible": false, "targets": 2 },
             { "orderable": true, "className": 'reorder', "targets": 0 },

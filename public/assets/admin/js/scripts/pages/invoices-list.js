@@ -16,6 +16,7 @@ $(document).ready(function() {
     var groupingTable = $('.row-grouping').DataTable({
         responsive: true,
         rowReorder: true,
+        
         "columnDefs": [
             { "visible": false, "targets": 5 },
         ],

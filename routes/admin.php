@@ -7,6 +7,7 @@ use App\Http\Controllers\Dashboard\LoginController;
 use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\Dashboard\SettingController;
 use App\Http\Controllers\Dashboard\TagController;
+use App\Http\Controllers\Dashboard\ProductController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -57,6 +58,14 @@ Route::group(
             //Begin Tags Routes
             Route::resource('tags', TagController::class);
             //End Tags Routes
+
+            //Begin Products Routes
+            Route::group(['prefix'=>'products','as'=> 'products.'], function(){
+                Route::get('price/{product_id}', [ProductController::class, 'getPrice'])->name('price');
+                Route::post('price', [ProductController::class, 'storePrice'])->name('price.store');
+            });
+            Route::resource('products', ProductController::class);
+            //End Products Routes
 
             Route::get('logout', [LoginController::class, 'logout'])->name('logout');
         });

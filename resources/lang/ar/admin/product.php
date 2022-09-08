@@ -1,0 +1,27 @@
+<?php
+return [
+    'products' => 'المنتجات',
+    'all_products' => 'جميع المنتجات',
+    'add_product' => 'إضافة منتج',
+    'add_new_product' => 'إضافة منتج جديد',
+    'basic_data_product_form' => 'البيانات الأساسية للمنتج',
+    'product_name' => 'اسم المنتج',
+    'product_description' => 'وصف المنتج',
+    'short_description' => 'الوصف المختصر للمنتج',
+    'select_category' => 'اختر القسم',
+    'please_select_category' => 'من فضلك اختر القسم',
+    'select_tags' => 'اختر العلامات الدلالية',
+    'please_select_tags' => 'من فضلك اختر العلامات الدلالية',
+    'please_select_special_price_type' => 'من فضلك اختر نوع السعر الخاص',
+    'select_brand' => 'اختر الماركة التجارية',
+    'please_select_brand' => 'من فضلك اختر الماركة التجارية',
+    'product_price' => 'السعر الاساسي',
+    'product_start_date' => 'تاريخ البدء',
+    'product_end_date' => 'تاريخ الإنتهاء',
+    'product_special_price' => 'السعر الخاص للمنتج',
+    'product_special_price_type' => 'نوع السعر الخاص للمنتج',
+    'fixed' => 'ثايت',
+    'present' => 'الحالي',
+    'info_about_price' => 'تفاصيل حول السعر',
+
+];

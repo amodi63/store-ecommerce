@@ -1,6 +1,7 @@
 <?php
 return [
     'brands' => 'Brands',
+    'brand' => 'Brand',
     'all_brands' => 'All Brands',
     'add_n_brand' => 'Add New Brand',
     'add_brand' => 'Add Brand',
