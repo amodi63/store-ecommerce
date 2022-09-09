@@ -49,7 +49,7 @@
                                             method="POST" enctype="multipart/form-data">
                                             @csrf
                                             <div class="form-body">
-                                                <input type="hidden" name="product_id", value="{{ $product->id }}">
+                                                <input type="hidden" name="id", value="{{ $product->id }}">
                                                 <h4 class="form-section"><i class="ft-home"></i>{{ __('admin/product.info_about_price') }}
                                                 </h4>
                                                 <div class="row">

@@ -23,5 +23,14 @@ return [
     'fixed' => 'ثايت',
     'present' => 'الحالي',
     'info_about_price' => 'تفاصيل حول السعر',
+    'inventory' => "المستودع",
+    'about_inventory' => "حول المستودع",
+    'product_stock' => 'مخزن المنتج',
+    'sku' => 'كود المنتج',
+    'manage_stock' => 'تتبع المنتج',
+    'in_stock' => 'متاح',
+    'qty' => 'الكمية',
+    'yes' => 'نعم',
+    'no' => 'لا',
 
 ];

@@ -63,6 +63,8 @@ Route::group(
             Route::group(['prefix'=>'products','as'=> 'products.'], function(){
                 Route::get('price/{product_id}', [ProductController::class, 'getPrice'])->name('price');
                 Route::post('price', [ProductController::class, 'storePrice'])->name('price.store');
+                Route::get('stock/{product_id}', [ProductController::class, 'getStock'])->name('stock');
+                Route::post('stock', [ProductController::class, 'storeStock'])->name('stock.store');
             });
             Route::resource('products', ProductController::class);
             //End Products Routes

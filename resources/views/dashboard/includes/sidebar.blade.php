@@ -90,7 +90,7 @@
                             data-i18n="nav.dash.ecommerce"> {{ __('admin/product.all_products') }} </a>
                     </li>
                     <li><a class="menu-item" href="{{ route('admin.products.create') }}"
-                            data-i18n="nav.dash.crypto">{{ __('admin/product.add_n_product') }} </a>
+                            data-i18n="nav.dash.crypto">{{ __('admin/product.add_new_product') }} </a>
                     </li>
                 </ul>
             </li>

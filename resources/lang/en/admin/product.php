@@ -23,5 +23,14 @@ return [
     'present' => 'Present',
     'please_select_special_price_type' => 'Please Select Special Price Type',
     'info_about_price' => 'Details About Price',
+    'inventory' => "Inventory",
+    'about_inventory' => "About Inventory",
+    'product_stock' => 'Product Stock',
+    'sku' => 'Sku',
+    'manage_stock' => 'Manage Stock',
+    'in_stock' => 'In Stock',
+    'qty' => 'Quantity',
+    'yes' => 'Yes',
+    'no' => 'No',
 
 ];

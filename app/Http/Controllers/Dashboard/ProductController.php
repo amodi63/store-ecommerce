@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GeneralProductRequest;
 use App\Http\Requests\ProductPriceRequest;
+use App\Http\Requests\ProductStockRequest;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Tag;
@@ -136,7 +137,7 @@ class ProductController extends Controller
        
         try {
             DB::beginTransaction();
-            $product = Product::find($request->product_id); 
+            $product = Product::find($request->id); 
             $product->update([
                 'price' => $request->price,
                 'special_price' => $request->special_price,
@@ -144,6 +145,29 @@ class ProductController extends Controller
                 'special_price_start' => $request->special_price_start,
                 'special_price_end' => $request->special_price_end,
             ]);
+            DB::commit();
+            return redirect()->route('admin.products.index')->with([
+                'success' => __('alerts/success.add'),
+
+            ]);
+        } catch (\Exception $exp) {
+            return redirect()->back()->with(['error' => __('alerts/errors.update')]);
+            DB::rollBack();
+        }
+    }
+    public function getStock($product_id)
+    {
+      $product = Product::find($product_id);
+
+        return view('dashboard.products.stock',compact('product'));
+    }
+    public function storeStock(ProductStockRequest $request)
+    { 
+        return $request;
+        try {
+            DB::beginTransaction();
+            $product = Product::find($request->id); 
+            $product->update($request->except(['_token', 'id']));
             DB::commit();
             return redirect()->route('admin.products.index')->with([
                 'success' => __('alerts/success.add'),
