@@ -32,5 +32,9 @@ class Category extends Model
     {
         return $this->belongsTo(self::class, 'parent_id', 'id')->withDefault();
     }
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', 1);
+    }
 
 }

@@ -25,6 +25,11 @@ class DatabaseSeeder extends Seeder
         // $this->call([
         //     CategoryDatabaseSeeder::class,
         // ]);
-        Category::factory(5)->create();
+        // $this->call([
+        //     ProductDatabaseSeeder::class,
+        // ]);
+        // $this->call([
+        //     AdminDatabaseSeeder::class,
+        // ]);
     }
 }

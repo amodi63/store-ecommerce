@@ -10,7 +10,9 @@
 ==========================================================================================*/
 (function(window, document, $) {
     'use strict';
+    
      $('.page1-links').twbsPagination({
+
         totalPages: 5,
         visiblePages: 4,
         prev: 'Prev',

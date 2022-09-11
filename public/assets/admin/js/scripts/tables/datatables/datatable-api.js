@@ -214,7 +214,8 @@ $('.show-child-rows tbody').on('click', 'td.details-control', function () {
 
     var tableDynamically = $('.hide-columns-dynamically').DataTable({
         "scrollY": "200px",
-        "paging": false
+        "paging": false,
+        
     });
 
     $('a.toggle-vis').on('click', function(e) {

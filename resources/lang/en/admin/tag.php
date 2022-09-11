@@ -2,6 +2,7 @@
 <?php
 return [
     'tags' => 'Tags',
+    'tag' => 'Tag',
     'all_tags' => 'All Tags',
     'add_n_tag' => 'Add New Tag',
     'add_tag' => 'Add Tag',

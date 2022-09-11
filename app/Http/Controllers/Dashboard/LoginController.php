@@ -11,6 +11,7 @@ class LoginController extends Controller
 {
     public function create()
     {
+
         return view('dashboard.auth.login');
     }
     public function store(LoginRequest $request)
@@ -22,12 +23,11 @@ class LoginController extends Controller
         } else {
             return redirect()->back()->with('error', 'خطأ في ادخال البيانات');
         }
-
+       
     }
     public function logout()
     {
         Auth::guard('admin')->logout();
         return redirect()->route('admin.login');
-
     }
 }

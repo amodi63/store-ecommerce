@@ -7,6 +7,7 @@ use App\Http\Controllers\Dashboard\LoginController;
 use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\Dashboard\SettingController;
 use App\Http\Controllers\Dashboard\TagController;
+use App\Http\Controllers\Dashboard\ProductController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -57,6 +58,20 @@ Route::group(
             //Begin Tags Routes
             Route::resource('tags', TagController::class);
             //End Tags Routes
+
+            //Begin Products Routes
+            Route::group(['prefix'=>'products','as'=> 'products.'], function(){
+                Route::get('price/{product_id}', [ProductController::class, 'getPrice'])->name('price');
+                Route::post('price', [ProductController::class, 'storePrice'])->name('price.store');
+                Route::get('stock/{product_id}', [ProductController::class, 'getStock'])->name('stock');
+                Route::post('stock', [ProductController::class, 'storeStock'])->name('stock.store');
+                Route::get('images/{product_id}', [ProductController::class, 'getImages'])->name('images');
+                Route::post('images', [ProductController::class, 'storeImages'])->name('images.store');
+                Route::post('images/db', [ProductController::class, 'storeImagesDb'])->name('images.store.db');
+                Route::delete('delete/image/{product_id}', [ProductController::class, 'destroyImg'])->name('images.destroy');
+            });
+            Route::resource('products', ProductController::class, ['except' => ['edit', 'show']]);
+            //End Products Routes
 
             Route::get('logout', [LoginController::class, 'logout'])->name('logout');
         });
