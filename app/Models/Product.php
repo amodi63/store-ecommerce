@@ -40,5 +40,13 @@ class Product extends Model
     {
         return $this->belongsToMany(Tag::class, 'product_tags');
     }
+    public function images()
+    {
+        return $this->hasMany(ProductImages::class, 'product_id');
+    }
+    public function getPhotoAttr($val)
+    {
+        return ($val !== null) ? asset('assets/images/products/' . $val) : "";
+    }
     
 }

@@ -65,8 +65,12 @@ Route::group(
                 Route::post('price', [ProductController::class, 'storePrice'])->name('price.store');
                 Route::get('stock/{product_id}', [ProductController::class, 'getStock'])->name('stock');
                 Route::post('stock', [ProductController::class, 'storeStock'])->name('stock.store');
+                Route::get('images/{product_id}', [ProductController::class, 'getImages'])->name('images');
+                Route::post('images', [ProductController::class, 'storeImages'])->name('images.store');
+                Route::post('images/db', [ProductController::class, 'storeImagesDb'])->name('images.store.db');
+                Route::delete('delete/image/{product_id}', [ProductController::class, 'destroyImg'])->name('images.destroy');
             });
-            Route::resource('products', ProductController::class);
+            Route::resource('products', ProductController::class, ['except' => ['edit', 'show']]);
             //End Products Routes
 
             Route::get('logout', [LoginController::class, 'logout'])->name('logout');

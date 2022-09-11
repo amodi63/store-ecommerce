@@ -6,13 +6,17 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GeneralProductRequest;
+use App\Http\Requests\ProductImagesRequest;
 use App\Http\Requests\ProductPriceRequest;
 use App\Http\Requests\ProductStockRequest;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\ProductImages;
 use App\Models\Tag;
 use GrahamCampbell\ResultType\Success;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Route;
 
 class ProductController extends Controller
 {
@@ -122,22 +126,18 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
-    {
-        //
-    }
     public function getPrice($product_id)
     {
-      $product = Product::find($product_id);
+        $product = Product::find($product_id);
 
         return view('dashboard.products.price', compact('product'));
     }
     public function storePrice(ProductPriceRequest $request)
     {
-       
+
         try {
             DB::beginTransaction();
-            $product = Product::find($request->id); 
+            $product = Product::find($request->id);
             $product->update([
                 'price' => $request->price,
                 'special_price' => $request->special_price,
@@ -157,16 +157,16 @@ class ProductController extends Controller
     }
     public function getStock($product_id)
     {
-      $product = Product::find($product_id);
+        $product = Product::find($product_id);
 
-        return view('dashboard.products.stock',compact('product'));
+        return view('dashboard.products.stock', compact('product'));
     }
     public function storeStock(ProductStockRequest $request)
-    { 
-        return $request;
+    {
+
         try {
             DB::beginTransaction();
-            $product = Product::find($request->id); 
+            $product = Product::find($request->id);
             $product->update($request->except(['_token', 'id']));
             DB::commit();
             return redirect()->route('admin.products.index')->with([
@@ -177,5 +177,59 @@ class ProductController extends Controller
             return redirect()->back()->with(['error' => __('alerts/errors.update')]);
             DB::rollBack();
         }
+    }
+    public function getImages($product_id)
+    {
+        $product = Product::with('images')->find($product_id);
+
+
+        return view('dashboard.products.images', compact('product'));
+    }
+    public function storeImages(Request $request)
+    {
+        $file = $request->file('dzfile');
+        $filename = uplodeImage('products', $file);
+
+        return response()->json([
+            'name' => $filename,
+            'original_name' => $file->getClientOriginalName(),
+        ]);
+    }
+    public function storeImagesDb(ProductImagesRequest $request)
+    {
+
+        try {
+            DB::beginTransaction();
+            if ($request->has('documents') && count($request->documents) > 0) {
+                foreach ($request->documents as $document) {
+                    $imgs = ProductImages::create([
+                        'product_id' => $request->product_id,
+                        'photo' => $document,
+                    ]);
+                }
+            }
+            DB::commit();
+            return redirect()->route('admin.products.index')->with([
+                'success' => __('alerts/success.add'),
+
+            ]);
+        } catch (\Exception $exp) {
+            return redirect()->back()->with(['error' => __('alerts/errors.update')]);
+            DB::rollBack();
+        }
+    }
+    public function destroyImg(Request $request)
+    {
+        $image = ProductImages::find($request->id);
+             $image_path = public_path() . '\assets\images\products\\' . $image->photo;
+
+        if (File::exists($image_path)) {
+             File::delete($image_path);
+        }
+        $image->delete();       
+        return redirect()->back()->with([
+            'success' => __('alerts/success.delete'),
+
+        ]);
     }
 }

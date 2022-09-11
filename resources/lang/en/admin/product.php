@@ -33,4 +33,16 @@ return [
     'yes' => 'Yes',
     'no' => 'No',
 
+    'images' => 'Images',
+    'add_images' => 'Add Images',
+    'about_images' =>'About Images',
+    'browser_support_msg' => 'Your browser does not support the image count feature, clouds, and buses',
+    'file_type_msg' => 'You cannot upload this type of file',
+    'cancel_upload' => 'Cancel Upload?',
+    'confirm_cancle_upload' => 'Are you sure to cancel the upload files?',
+    'delete_image' =>  'Delete Image',
+    'cant_upload_more' => 'You cannot upload more than this',
+    'drop_to_upload' => 'Drop files here to upload',
+    'delete' => 'Delete'
+
 ];
