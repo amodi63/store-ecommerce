@@ -28,6 +28,9 @@ class Product extends Model
     {
         return $this->is_active == 0 ? __('admin/category.not_active') : __('admin/category.active');
     }
+    public function scopeActive($q) {
+        return $q->where('is_active', 1);
+    }
     public function brand()
     {
         return $this->belongsTo(Brand::class, 'brand_id', 'id')->withDefault();
@@ -43,6 +46,10 @@ class Product extends Model
     public function images()
     {
         return $this->hasMany(ProductImages::class, 'product_id');
+    }
+    public function options()
+    {
+        return $this->hasMany(AttributeOption::class, 'product_id');
     }
     public function getPhotoAttr($val)
     {

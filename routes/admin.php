@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Dashboard\AttributeOptionController;
+use App\Http\Controllers\Dashboard\AttributeProductController;
 use App\Http\Controllers\Dashboard\BrandController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
@@ -69,6 +71,13 @@ Route::group(
                 Route::post('images', [ProductController::class, 'storeImages'])->name('images.store');
                 Route::post('images/db', [ProductController::class, 'storeImagesDb'])->name('images.store.db');
                 Route::delete('delete/image/{product_id}', [ProductController::class, 'destroyImg'])->name('images.destroy');
+                //Begin Products Attribute Routes
+                Route::resource('attribute', AttributeProductController::class)->except(['show']);
+                //End Products Attribute Routes
+                //Begin Products Attribute Options Routes
+                Route::resource('attributeoption', AttributeOptionController::class)->except(['show']);
+                //End Products Attribute Options Routes
+            
             });
             Route::resource('products', ProductController::class, ['except' => ['edit', 'show']]);
             //End Products Routes

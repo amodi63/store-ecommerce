@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 
+
 class ProductController extends Controller
 {
     /**
@@ -221,15 +222,18 @@ class ProductController extends Controller
     public function destroyImg(Request $request)
     {
         $image = ProductImages::find($request->id);
-             $image_path = public_path() . '\assets\images\products\\' . $image->photo;
-
+        $image_path = public_path() . '\assets\images\products\\' . $image->photo;
+        
         if (File::exists($image_path)) {
-             File::delete($image_path);
+            File::delete($image_path);
         }
         $image->delete();       
         return redirect()->back()->with([
             'success' => __('alerts/success.delete'),
-
+            
         ]);
     }
+    
+    
+    
 }

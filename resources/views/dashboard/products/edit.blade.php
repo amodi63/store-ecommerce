@@ -132,7 +132,7 @@
                                                     <i class="ft-x"></i> {{__('admin/shippingMethod.remove')}}
                                                 </button>
                                                 <button type="submit" class="btn btn-primary">
-                                                    <i class="la la-check-square-o"></i> {{__('admin/shippingMethod.save')}}
+                                                    <i class="la la-check-square-o"></i> {{__('admin/shippingMethod.update')}}
                                                 </button>
                                             </div>
                                         </form>

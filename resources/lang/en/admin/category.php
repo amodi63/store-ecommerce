@@ -6,6 +6,7 @@ return [
     'all_main_categories' => 'All Categories',
     'name' => 'Name Category',
     'main_category' => 'Category',
+    'main_categories' => 'Categories',
     'slug' => 'Slug',
     'status' => 'Status',
     'img_category' => 'Image Category',

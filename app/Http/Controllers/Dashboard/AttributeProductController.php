@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\BrandRequest;
-use App\Models\Brand;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\AttributeRequest;
+use App\Models\Attribute;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
 
-class BrandController extends Controller
+class AttributeProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +17,9 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $brands = Brand::orderBy('id', 'desc')->paginate(PATINATION_COUNT);
-        return view('dashboard.brands.index', compact('brands'));
+        $attributes = Attribute::select('id')->paginate(PATINATION_COUNT);
+
+        return view('dashboard.attributes.index', compact('attributes'));
     }
 
     /**
@@ -29,7 +29,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        return view('dashboard.brands.create');
+        return view('dashboard.attributes.create');
     }
 
     /**
@@ -38,20 +38,11 @@ class BrandController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(BrandRequest $request)
+    public function store(AttributeRequest $request)
     {
         try {
             DB::beginTransaction();
-            if (!$request->has('is_active')) {
-                $request->request->add(['is_active' => 0]);
-            }
-            $img_name = '';
-            if ($request->has('photo')) {
-                $img_name = uplodeImage('brands', $request->photo);
-            }
-            $brand = Brand::create($request->except(['_token', 'photo']));
-            $brand->photo = $img_name;
-            $brand->save();
+            Attribute::create($request->all());
             DB::commit();
             return redirect()->back()->with([
                 'success' => __('alerts/success.add'),
@@ -83,8 +74,8 @@ class BrandController extends Controller
      */
     public function edit($id)
     {
-        $brand = Brand::FindOrFail($id);
-        return view('dashboard.brands.edit', compact('brand'));
+         $attribute = Attribute::FindOrFail($id);
+        return view('dashboard.attributes.edit', compact('attribute'));
     }
 
     /**
@@ -94,25 +85,14 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(BrandRequest $request, $id)
+    public function update(AttributeRequest $request, $id)
     {
         try {
             DB::beginTransaction();
-            $brand = Brand::findOrFail($id);
-            if ($request->has('photo')) {
-                $img_name = uplodeImage('brands', $request->photo);
-                Brand::where('id', $id)->update(['photo' => $img_name]);
-                $path = public_path('assets/images/brands/' . $brand->photo);
-                if (File::exists($path)) {
-                    File::delete($path);
-                }
-            }
-            if (!$request->has('is_active')) {
-                $request->request->add(['is_active' => 0]);
-            }
-            $brand->update($request->except(['photo', 'id', '_token']));
+              $atttribute =  Attribute::find($id);
+             $atttribute->update($request->except('id', '_token'));
             DB::commit();
-            return redirect()->route('admin.brands.index')->with([
+            return redirect()->back()->with([
                 'success' => __('alerts/success.update'),
 
             ]);
@@ -131,13 +111,8 @@ class BrandController extends Controller
      */
     public function destroy($id)
     {
-        $brand = Brand::find($id);
-        Brand::find($id)->delete();
-        $path = public_path('assets/images/brands/' . $brand->photo);
-        if (File::exists($path)) {
-            File::delete($path);
-        }
+       
+        Attribute::destroy($id);
         return redirect()->back()->with(['success' => __('alerts/success.delete')]);
-
     }
 }
