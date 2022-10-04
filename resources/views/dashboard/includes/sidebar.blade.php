@@ -29,7 +29,7 @@
                     </span>
                 </a>
                 <ul class="menu-content">
-                    <li class="active"><a class="menu-item" href="{{ route('user.index') }}"
+                    {{-- <li class="active"><a class="menu-item" href="{{ route('user.index') }}" --}}
                             data-i18n="nav.dash.ecommerce"> {{ __('user/user.all_users') }} </a>
                     </li>
                     {{-- <li><a class="menu-item" href="{{ route('admin.categories.create') }}"

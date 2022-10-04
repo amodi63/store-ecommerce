@@ -195,7 +195,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
-        Laravel\Passport\PassportServiceProvider::class,    
+        Laravel\Passport\PassportServiceProvider::class,
+        App\Providers\FortifyServiceProvider::class,
 
 
     ],
