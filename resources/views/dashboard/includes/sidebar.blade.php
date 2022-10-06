@@ -118,21 +118,6 @@
                     </li>
                 </ul>
             </li>
-
-
-            <li class="nav-item">
-                <a href=""><i class="la la-male"></i>
-                    <span class="menu-title" data-i18n="nav.dash.main">تذاكر المراسلات </span>
-                    <span class="badge badge badge-danger  badge-pill float-right mr-2">0</span>
-                </a>
-                <ul class="menu-content">
-                    <li class="active"><a class="menu-item" href="" data-i18n="nav.dash.ecommerce"> تذاكر
-                            الطلاب </a>
-                    </li>
-                </ul>
-            </li>
-
-
             <li class=" nav-item"><a href="#"><i class="la la-television"></i><span class="menu-title"
                         data-i18n="nav.templates.main">{{ __('admin/sidebar.settings') }}</span></a>
                 <ul class="menu-content">
@@ -149,17 +134,18 @@
                                     data-i18n="nav.templates.vert.compact_menu">{{ __('admin/sidebar.outer_shipping') }}</a>
                             </li>
                         </ul>
-                    </li>
-                    {{-- <li><a class="menu-item" href="#" data-i18n="nav.templates.horz.main">Horizontal</a>
+                    
+                </ul>
+                <ul class="menu-content">
+                    <li><a class="menu-item" href="#"
+                            data-i18n="nav.templates.vert.main">{{ __('admin/slider.main_slider') }}</a>
                         <ul class="menu-content">
-                            <li><a class="menu-item" href="../horizontal-menu-template"
-                                   data-i18n="nav.templates.horz.classic">Classic</a>
+                            <li><a class="menu-item" href="{{ route('admin.slider.create') }}"
+                                    data-i18n="nav.templates.vert.classic_menu">{{ __('admin/slider.add_image_slider') }}</a>
                             </li>
-                            <li><a class="menu-item" href="../horizontal-menu-template-nav"
-                                   data-i18n="nav.templates.horz.top_icon">Full Width</a>
-                            </li>
+                            
                         </ul>
-                    </li> --}}
+                    
                 </ul>
             </li>
             <li class=" navigation-header">

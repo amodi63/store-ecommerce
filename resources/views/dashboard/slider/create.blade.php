@@ -10,11 +10,11 @@
                                 <li class="breadcrumb-item"><a
                                         href="{{ route('admin.dashboard') }}">{{ __('admin/category.main') }} </a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{ route('admin.products.index') }}">
-                                        {{ __('admin/product.products') }}</a>
+                                <li class="breadcrumb-item"><a href="#">
+                                        {{ __('admin/sidebar.settings') }}</a>
 
                                 </li>
-                                <li class="breadcrumb-item active"> {{ __('admin/product.images') }}
+                                <li class="breadcrumb-item active"> {{ __('admin/slider.main_slider') }}
                                 </li>
                             </ol>
                         </div>
@@ -45,13 +45,12 @@
                                 <div class="card-content collapse show">
 
                                     <div class="card-body">
-                                        <form class="form" action="{{ route('admin.products.images.store.db') }}"
+                                        <form class="form" action="{{ route('admin.slider.images.store.db') }}"
                                             method="POST" enctype="multipart/form-data">
                                             @csrf
-                                            <input type="hidden" name="product_id", value="{{ $product->id }}">
                                             <div class="form-body">
                                                 <h4 class="form-section"><i class="ft-home"></i>
-                                                    {{ __('admin/product.about_images') }} </h4>
+                                                    {{ __('admin/slider.about_slider') }} </h4>
 
 
                                                 <div class="form-group" style="margin-bottom: -0.5rem;">
@@ -66,7 +65,7 @@
                                                 @enderror
                                             </div>
                                     </div>
-                                    <div class="form-actions" style="padding: 20px">
+                                    <div class="form-actions" style="padding:20px">
                                         <button type="button" class="btn btn-warning mr-1" onclick="history.back();">
                                             <i class="ft-x"></i> {{ __('admin/shippingMethod.remove') }}
                                         </button>
@@ -76,11 +75,9 @@
                                         </button>
                                     </div>
                                     </form>
-
-
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
             </div>
@@ -94,21 +91,21 @@
                     <div class="card-body  my-gallery" itemscope="" itemtype="http://schema.org/ImageGallery"
                         data-pswp-uid="1">
                         <div class="row">
-                            @isset($product->images)
-                                @forelse($product->images as $img )
+                            @isset($images)
+                                @forelse($images as $image)
                                     <figure class="col-lg-3 col-md-6 col-12" itemprop="associatedMedia" itemscope=""
                                         itemtype="http://schema.org/ImageObject">
-                                        <a href="{{  $product->getPhotoAttr($img->photo) }}" itemprop="contentUrl" data-size="480x360">
-                                            <img class="img-thumbnail img-fluid" src="{{  $product->getPhotoAttr($img->photo) }}" itemprop="thumbnail"
+                                        <a href="{{ asset('assets/images/sliders') .'/'. $image->image }}" itemprop="contentUrl" data-size="480x360">
+                                            <img class="img-thumbnail img-fluid" src="{{ asset('assets/images/sliders') .'/'. $image->image }}" itemprop="thumbnail"
                                                 alt="Image description">
                                         </a>
                                         <figcaption >
                                             <form method="POST"
-                                                            action="{{ route('admin.products.images.destroy', [$img->product_id]) }}">
+                                                            action="{{ route('admin.slider.images.destroy', [$image->id]) }}">
                                                             {{ csrf_field() }}
                                                             {{ method_field('DELETE') }}
                                                             <input type="hidden" name="id"
-                                                                value="{{ $img->id }}">
+                                                                value="{{ $image->id }}">
                                                             <div class="form-group d-flex">
                                                                 <input type="submit" class="btn btn-danger" style='margin:15px auto;'
                                                                     style="margin:6% 0  0 25%;padding: 8px 20px;"
@@ -124,7 +121,92 @@
                         </div>
 
                     </div>
-                    
+                    <!--/ Image grid -->
+
+                    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+                    {{-- <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+                        <!-- Background of PhotoSwipe.
+                                It's a separate element as animating opacity is faster than rgba(). -->
+                        <div class="pswp__bg"></div>
+
+                        <!-- Slides wrapper with overflow:hidden. -->
+                        <div class="pswp__scroll-wrap">
+
+                            <!-- Container that holds slides.
+                                    PhotoSwipe keeps only 3 of them in the DOM to save memory.
+                                    Don't modify these 3 pswp__item elements, data is added later on. -->
+                            <div class="pswp__container" style="transform: translate3d(0px, 0px, 0px);">
+                                <div class="pswp__item" style="display: block; transform: translate3d(-1511px, 0px, 0px);">
+                                    <div class="pswp__zoom-wrap"
+                                        style="transform: translate3d(435px, 133px, 0px) scale(0.670391);"><img
+                                            class="pswp__img" src="../../../app-assets/images/gallery/4.jpg"
+                                            style="opacity: 1; width: 716px; height: 537px;"></div>
+                                </div>
+                                <div class="pswp__item" style="transform: translate3d(0px, 0px, 0px);">
+                                    <div class="pswp__zoom-wrap"
+                                        style="transform: translate3d(309px, 250.641px, 0px) scale(0.314595);"><img
+                                            class="pswp__img pswp__img--placeholder"
+                                            src="../../../app-assets/images/gallery/1.jpg"
+                                            style="width: 716px; height: 537px; display: none;"><img class="pswp__img"
+                                            src="../../../app-assets/images/gallery/1.jpg"
+                                            style="display: block; width: 716px; height: 537px;">
+                                    </div>
+                                </div>
+                                <div class="pswp__item" style="display: block; transform: translate3d(1511px, 0px, 0px);">
+                                    <div class="pswp__zoom-wrap"
+                                        style="transform: translate3d(435px, 133px, 0px) scale(0.670391);"><img
+                                            class="pswp__img" src="../../../app-assets/images/gallery/2.jpg"
+                                            style="opacity: 1; width: 716px; height: 537px;"></div>
+                                </div>
+                            </div>
+
+                            <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+                            <div class="pswp__ui pswp__ui--fit pswp__ui--hidden">
+
+                                <div class="pswp__top-bar">
+
+                                    <!--  Controls are self-explanatory. Order can be changed. -->
+
+                                    <div class="pswp__counter">1 / 4</div>
+
+                                    <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                                    <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                                    <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                                    <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                                    <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                                    <!-- element will get class pswp__preloader-active when preloader is running -->
+                                    <div class="pswp__preloader">
+                                        <div class="pswp__preloader__icn">
+                                            <div class="pswp__preloader__cut">
+                                                <div class="pswp__preloader__donut"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                                    <div class="pswp__share-tooltip"></div>
+                                </div>
+
+                                <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+                                </button>
+
+                                <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+                                </button>
+
+                                <div class="pswp__caption">
+                                    <div class="pswp__caption__center"></div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -162,12 +244,12 @@
             dictInvalidFileType: "{{ __('admin/product.file_type_msg') }}",
             dictCancelUpload: "{{ __('admin/product.cancel_upload') }}",
             dictCancelUploadConfirmation: "{{ __('admin/product.confirm_cancle_upload') }}",
-            dictRemoveFile: "{{__('admin/product.delete_image')}}",
+            dictRemoveFile: "{{ __('admin/product.delete_image') }}",
             dictMaxFilesExceeded: "{{ __('admin/product.cant_upload_more') }}",
             headers: {
                 'X-CSRF-TOKEN': "{{ csrf_token() }}"
             },
-            url: "{{ route('admin.products.images.store') }}", // Set the url
+            url: "{{ route('admin.slider.images.store') }}", // Set the url
 
 
             success: function(file, response) {
@@ -202,5 +284,3 @@
         }
     </script>
 @stop
-
-                                                
