@@ -43,6 +43,28 @@ return [
     'delete_image' =>  'Delete Image',
     'cant_upload_more' => 'You cannot upload more than this',
     'drop_to_upload' => 'Drop files here to upload',
-    'delete' => 'Delete'
+    'delete' => 'Delete',
+
+    'attributes' => 'Attributes',
+    'add_attribute'=> 'Add Attribute',
+    'about_attribute'=> 'Details About Attributes',
+    'attribute_name'=> 'Attribute Name',
+    'edit_attribute' => 'Edit Attribute',
+    'all_attributes'=> 'All Attributes',
+    'add_new_attribute' => 'Add New Attribute',
+    
+    'all_attributes_option' => 'All Attributes Option',
+    'add_new_attribute_option' => 'Add New Option',
+    'add_attribute_option' => 'Add Option',
+    'attribute_options' => 'Attribute Options',
+    'about_attribute_option'=> 'Details About Attribute Options',
+    'attribute_option_name' => 'Attribute Option Name',
+    'option_price' => 'Price',
+    'options' => 'Options',
+    'edit_attribute_option' => 'Edit Attribute Option',
+
+    
+
+
 
 ];

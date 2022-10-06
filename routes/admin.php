@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Dashboard\AttributeOptionController;
+use App\Http\Controllers\Dashboard\AttributeProductController;
 use App\Http\Controllers\Dashboard\BrandController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
@@ -8,6 +10,7 @@ use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\Dashboard\SettingController;
 use App\Http\Controllers\Dashboard\TagController;
 use App\Http\Controllers\Dashboard\ProductController;
+use App\Http\Controllers\Dashboard\SliderController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -69,9 +72,27 @@ Route::group(
                 Route::post('images', [ProductController::class, 'storeImages'])->name('images.store');
                 Route::post('images/db', [ProductController::class, 'storeImagesDb'])->name('images.store.db');
                 Route::delete('delete/image/{product_id}', [ProductController::class, 'destroyImg'])->name('images.destroy');
+                //Begin Products Attribute Routes
+                Route::resource('attribute', AttributeProductController::class)->except(['show']);
+                //End Products Attribute Routes
+                //Begin Products Attribute Options Routes
+                Route::resource('attributeoption', AttributeOptionController::class)->except(['show']);
+                //End Products Attribute Options Routes
+                
+                
+                
             });
             Route::resource('products', ProductController::class, ['except' => ['edit', 'show']]);
             //End Products Routes
+
+            //Begin Slider Routes
+            Route::group(['prefix'=>'sliders','as'=> 'slider.'], function(){
+            Route::get('/', [SliderController::class, 'create'])->name('create');
+            Route::post('images', [SliderController::class, 'storeImages'])->name('images.store');
+            Route::post('images/db', [SliderController::class, 'storeImagesDb'])->name('images.store.db');
+            Route::delete('delete/image/{product_id}', [SliderController::class, 'destroyImg'])->name('images.destroy');
+            });
+            //End Slider Routes
 
             Route::get('logout', [LoginController::class, 'logout'])->name('logout');
         });

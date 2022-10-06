@@ -97,6 +97,7 @@ class BrandController extends Controller
     public function update(BrandRequest $request, $id)
     {
         try {
+            DB::beginTransaction();
             $brand = Brand::findOrFail($id);
             if ($request->has('photo')) {
                 $img_name = uplodeImage('brands', $request->photo);

@@ -80,39 +80,52 @@
 
                                 </div>
                             </div>
-                            @if ($product->images && $product->images->count() > 0)
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4 class="card-title" id="basic-layout-form">
-                                            {{ __('admin/product.images') }} </h4>
-                                    </div>
-                                    <div class="card-body">
-
-                                        <div class="container">
-                                            <div class="row">
-                                                @foreach ($product->images as $img)
-                                                    <div class="col-lg-3 col-md-3 col-xs-3 thumb">
-                                                        <img class="img-responsive" width="200px"
-                                                            src="{{ $product->getPhotoAttr($img->photo) }}" alt="">
-                                                        <form method="POST"
+                            
+                        </div>
+                    </div>
+            </div>
+            <div class="card">
+                <div class="card-content collapse show">    
+                    <div class="card-body">
+                        <div class="card-text">
+                            <p>{{ __('admin/slider.current_imgs') }}.</p>
+                        </div>
+                    </div>
+                    <div class="card-body  my-gallery" itemscope="" itemtype="http://schema.org/ImageGallery"
+                        data-pswp-uid="1">
+                        <div class="row">
+                            @isset($product->images)
+                                @forelse($product->images as $img )
+                                    <figure class="col-lg-3 col-md-6 col-12" itemprop="associatedMedia" itemscope=""
+                                        itemtype="http://schema.org/ImageObject">
+                                        <a href="{{  $product->getPhotoAttr($img->photo) }}" itemprop="contentUrl" data-size="480x360">
+                                            <img class="img-thumbnail img-fluid" src="{{  $product->getPhotoAttr($img->photo) }}" itemprop="thumbnail"
+                                                alt="Image description">
+                                        </a>
+                                        <figcaption >
+                                            <form method="POST"
                                                             action="{{ route('admin.products.images.destroy', [$img->product_id]) }}">
                                                             {{ csrf_field() }}
                                                             {{ method_field('DELETE') }}
                                                             <input type="hidden" name="id"
-                                                                value="{{ $product->images[0]->id }}">
-                                                            <div class="form-group">
-                                                                <input type="submit" class="btn btn-danger"
+                                                                value="{{ $img->id }}">
+                                                            <div class="form-group d-flex">
+                                                                <input type="submit" class="btn btn-danger" style='margin:15px auto;'
                                                                     style="margin:6% 0  0 25%;padding: 8px 20px;"
                                                                     value="{{ __('admin/product.delete') }}">
                                                             </div>
-                                                        </form>
-                                                    </div>
-                                                @endforeach
-                                            </div>
-                                        </div>
-                            @endif
+                                            </form>
+                                        </figcaption>
+                                    </figure>
+                                @empty
+                                {{ __('admin/slider.no_pic') }}
+                                @endforelse
+                            @endisset
                         </div>
+
                     </div>
+                    
+                </div>
             </div>
         </div>
     </div>
@@ -124,6 +137,12 @@
 
 @stop
 @section('style')
+<style>
+    img.img-thumbnail.img-fluid {
+        width:261px;
+        height: 261px;
+    }
+    </style>
     <link rel="stylesheet" href="{{ asset('assets/admin/css/plugins/file-uploaders/dropzone.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/css/plugins/file-uploaders/dropzone.min.css') }}">
 @endsection
@@ -139,12 +158,12 @@
             clickable: true,
             addRemoveLinks: true,
             acceptedFiles: "image/*",
-            dictFallbackMessage: "{{ __('admin.product.browser_support_msg') }}",
-            dictInvalidFileType: "{{ __('admin.product.file_type_msg') }}",
-            dictCancelUpload: "{{ __('admin.product.cancel_upload') }}",
-            dictCancelUploadConfirmation: "__('admin.product.confirm_cancle_upload')",
-            dictRemoveFile: "__('admin.product.delete_image')",
-            dictMaxFilesExceeded: "{{ __('admin.product.cant_upload_more') }}",
+            dictFallbackMessage: "{{ __('admin/product.browser_support_msg') }}",
+            dictInvalidFileType: "{{ __('admin/product.file_type_msg') }}",
+            dictCancelUpload: "{{ __('admin/product.cancel_upload') }}",
+            dictCancelUploadConfirmation: "{{ __('admin/product.confirm_cancle_upload') }}",
+            dictRemoveFile: "{{__('admin/product.delete_image')}}",
+            dictMaxFilesExceeded: "{{ __('admin/product.cant_upload_more') }}",
             headers: {
                 'X-CSRF-TOKEN': "{{ csrf_token() }}"
             },
@@ -183,3 +202,5 @@
         }
     </script>
 @stop
+
+                                                

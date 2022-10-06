@@ -42,6 +42,25 @@ return [
     'delete_image' =>  'حذف الصورة',
     'cant_upload_more' => 'لايمكنك رفع عدد اكثر من هذا ',
     'drop_to_upload' => 'يمكنك رفع أكثر من صورة هنا',
-    'delete' => 'حذف الصورة'    
+    'delete' => 'حذف الصورة',
+
+    'attributes' => 'السمات',
+    'add_attribute'=> 'إاضافة سمة',
+    'about_attribute'=> 'المعلومات الأساسية حول السمات',
+    'attribute_name'=> 'اسم السمة',
+    'edit_attribute' => 'نعديل السمة',
+    'all_attributes'=> 'جميع السمات',
+    'add_new_attribute' => 'إضافة سمة جديدة',
+    
+    'all_attributes_option' => 'جميع خيارات السمات',
+    'add_new_attribute_option' => 'اضافة خيار جديد',
+    'add_attribute_option' => 'إضافة سمة',
+    'attribute_options' => 'خيارات السمات',
+    'about_attribute_option'=> 'المعلومات الأساسية حول خيارات السمات',
+    'attribute_option_name' => 'اسم خيار السمة',
+    'option_price' => 'السعر',
+    'options' => 'الخيارات',
+    'edit_attribute_option' => 'تعديل خيار السمة',
+ 
 
 ];

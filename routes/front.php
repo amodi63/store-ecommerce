@@ -1,45 +1,29 @@
 <?php
 
-use App\Http\Controllers\Dashboard\BrandController;
-use App\Http\Controllers\Dashboard\CategoryController;
-use App\Http\Controllers\Dashboard\DashboardController;
-use App\Http\Controllers\Dashboard\LoginController;
-use App\Http\Controllers\Dashboard\ProfileController;
-use App\Http\Controllers\Dashboard\SettingController;
-use App\Http\Controllers\Dashboard\TagController;
-use App\Http\Controllers\Dashboard\ProductController;
-use App\Http\Controllers\frontend\UserController;
+use App\Http\Controllers\Frontend\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Frontend\Auth\ConfirmablePasswordController;
+use App\Http\Controllers\Frontend\Auth\EmailVerificationNotificationController;
+use App\Http\Controllers\Frontend\Auth\EmailVerificationPromptController;
+use App\Http\Controllers\Frontend\Auth\NewPasswordController;
+use App\Http\Controllers\Frontend\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Frontend\Auth\RegisteredUserController;
+use App\Http\Controllers\Frontend\Auth\VerifyEmailController;
+use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-
-/*
-|--------------------------------------------------------------------------
-| Front Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
-        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],
+        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
     ],
     function () {
-        Route::group(['middleware' => ['auth:admin'], ], function () {
-            // Route::get('/', [LoginController::class, 'create'])->name('dashboard');
-            Route::resource('user', UserController::class);
-
+        Route::get('/',[HomeController::class, 'home'] )->name('home');
+        Route::get('/sliders',[HomeController::class, 'getSliders'] )->name('sliders');
+        Route::group(['middleware' => ['auth:web', 'verified'], 'as' => 'user.'], function () {
+            Route::get('profile', function () {
+                return 'Profile Page';
+            });
         });
-        Route::get('logout', [LoginController::class, 'logout'])->name('logout');
     }
 );
-
-
-Route::group(['as' => 'user.', 'middleware' => ['guest:web']], function () {
-    Route::get('login', [LoginController::class, 'create'])->name('login');
-    Route::post('login', [LoginController::class, 'store'])->name('post.login');
-});
